@@ -1,4 +1,11 @@
 {% extends 'base.html' %}
 {% block content %}
     <h1>Accounts Page</h1>
-    {% endblock %}
+    <ul>
+        {% for account in accounts %}
+            <li><a href="{% url 'account_detail' pk=account.pk %}">{{ account.name }}</a></li>
+        {% endfor %}
+    </ul>
+
+    <h2><a href="{% url 'create_account'%}">Create a new account</a></h2>
+{% endblock %}

@@ -9,12 +9,12 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
 </head>
 <body>
-    <header>PennyPincher</header>
+    <header><a href="{% url 'home' %}">PennyPincher</a></header>
     <nav>
         <ul>
-            <li href="/">Home</li>
-            <li><a href="/accounts">Accounts</a></li>
-            <li>Services and Tools</li>
+            <li><a href="{% url 'about' %}">About</a></li>
+            <li><a href="{% url 'accounts' %}">Accounts</a></li>
+            {% comment %} <li>Services and Tools</li> {% endcomment %}
         </ul>
     </nav>
     {% block content %}
