@@ -4,4 +4,21 @@
 <p>Balance: ${{ account.balance }}</p>
 <a href="{% url 'account_update' pk=account.pk %}">Edit</a>
 <a href="{% url 'account_delete' pk=account.pk %}">Delete</a>
+
+<h2>Transactions:</h2>
+    <ul>
+        {% for transaction in transactions %}
+            <li>{{ transaction.date }} - Amount: ${{ transaction.amount }} - Description: {{ transaction.description }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Add Transaction</h2>
+    <form action="{% url 'add_transaction' pk=account.id %}" method="POST">
+    {% csrf_token %}
+    {{ transaction_form.as_p }}
+    <button type="submit">Submit</button>
+  </form>
+
+  
+
     {% endblock %}
