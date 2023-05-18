@@ -1,11 +1,15 @@
 {% extends 'base.html' %}
 {% block content %}
-    <h1>Accounts Page</h1>
-    <ul>
+    <h2>Your Accounts:</h2>
+    <ul class="list-unstyled">
         {% for account in accounts %}
             <li><a href="{% url 'account_detail' pk=account.pk %}">{{ account.name }}</a></li>
         {% endfor %}
     </ul>
+<br>
 
-    <h2><a href="{% url 'create_account'%}">Create a new account</a></h2>
+    <h6 class="text-end"><a href="{% url 'create_account'%}">Create a new account here</a></h6>
+
+    
+
 {% endblock %}

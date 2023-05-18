@@ -32,9 +32,12 @@ def account_detail(request, pk):
 
 def add_transaction(request, pk):
     form = TransactionForm(request.POST)
+    selected_value = request.POST.get("tags") 
+    print(selected_value)
     if form.is_valid():
         new_transaction = form.save(commit=False)
         new_transaction.account_id = pk
+        new_transaction.tags.set(selected_value) 
         new_transaction.save()
     return redirect('account_detail', pk=pk)
     
@@ -60,7 +63,7 @@ class AccountDelete(DeleteView):
 
 def assoc_tag(request, transaction_id, tag_id):
   Transaction.objects.get(id=transaction_id).tags.add(tag_id)
-  return redirect('detail', pk=transaction_id)
+  return redirect('account_detail', pk=transaction_id)
 
 # def unassoc_toy(request, cat_id, toy_id):
 #   Cat.objects.get(id=cat_id).toys.remove(toy_id)
