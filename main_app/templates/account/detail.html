@@ -8,7 +8,7 @@
 <h2>Transactions:</h2>
     <ul>
         {% for transaction in transactions %}
-            <li>{{ transaction.date }} - Amount: ${{ transaction.amount }} - Description: {{ transaction.description }}</li>
+            <li>{{ transaction.date }} - Amount: ${{ transaction.amount }} - Description: {{ transaction.description }} - Tags: {% if transaction.tags.count %} {% for tag in transaction.tags.all %} {{ tag }} {% endfor %} {% else %} None{% endif %}</li>
         {% endfor %}
     </ul>
 
@@ -19,6 +19,12 @@
     <button type="submit">Submit</button>
   </form>
 
+  {% comment %} <h3>Tags:</h3>
+<ul>
+  {% for tag in tags %}
+    <li>{{ tag }}</li>
+  {% endfor %} 
+</ul>{% endcomment %}
   
 
     {% endblock %}

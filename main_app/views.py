@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Account, Transaction
+from .models import Account, Transaction, Tag
 from .forms import TransactionForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 
@@ -22,10 +22,12 @@ def account_detail(request, pk):
     account = get_object_or_404(Account, pk=pk)
     transactions = Transaction.objects.filter(account=account)
     transaction_form = TransactionForm()
+    tags = Tag.objects.filter(transaction__account=account).distinct()
     return render(request, 'account/detail.html', {
         'account': account,
         'transactions': transactions,
-        'transaction_form': transaction_form
+        'transaction_form': transaction_form,
+        'tags': tags
     })
 
 def add_transaction(request, pk):
@@ -55,3 +57,11 @@ class AccountDelete(DeleteView):
     model = Account
     success_url = '/accounts'
     
+
+def assoc_tag(request, transaction_id, tag_id):
+  Transaction.objects.get(id=transaction_id).tags.add(tag_id)
+  return redirect('detail', pk=transaction_id)
+
+# def unassoc_toy(request, cat_id, toy_id):
+#   Cat.objects.get(id=cat_id).toys.remove(toy_id)
+#   return redirect('detail', cat_id=cat_id)

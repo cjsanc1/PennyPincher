@@ -2,7 +2,17 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
 
+
+
 # Create your models here.
+class Tag(models.Model):
+    name = models.CharField(max_length=50)
+    # Add any additional fields as needed
+
+    def __str__(self):
+        return self.name
+
+
 class Account(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=50)
@@ -24,6 +34,7 @@ class Transaction(models.Model):
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     account = models.ForeignKey(Account, on_delete=models.CASCADE)
     description = models.CharField(max_length=200)
+    tags = models.ManyToManyField(Tag)
 
     def __str__(self):
         return f'{self.user.username} - {self.date} - {self.amount}'
