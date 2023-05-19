@@ -1,6 +1,6 @@
 # PennyPincher
 
-PennyPincher is a personal finance management app designed to help users track their expenses, manage their accounts, and gain insights into their spending habits. It provides a user-friendly interface to create and manage accounts, record transactions, and categorize expenses using tags.
+PennyPincher is a personal finance management app designed to help users track their expenses, manage their accounts, and gain insight into their spending habits. It provides a user-friendly interface to create and manage accounts, record transactions, and categorize expenses using tags.
 
 ## Screenshots
 
