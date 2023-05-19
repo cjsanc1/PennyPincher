@@ -1,15 +1,23 @@
 {% extends 'base.html' %}
 {% block content %}
 <h1>{{ account.name }}</h1>
-<p>Balance: ${{ account.balance }}</p>
-<a href="{% url 'account_update' pk=account.pk %}">Edit</a>
-<a href="{% url 'account_delete' pk=account.pk %}">Delete</a>
-
-<h2>Transactions:</h2>
+<a href="{% url 'account_update' pk=account.pk %}">Edit Account</a>
+<a href="{% url 'account_delete' pk=account.pk %}">Delete Account</a>
+<br>
+<br>
+<h2>Balance: ${{ account.balance }}</h2>
+<br>
+<h4>Transactions:</h4>
+{% if transactions %}
     <ul>
         {% for transaction in transactions %}
-            <li>{{ transaction.date }} - Amount: ${{ transaction.amount }} - Description: {{ transaction.description }} - Tags: {% if transaction.tags.count %} {% for tag in transaction.tags.all %} {{ tag }} {% endfor %} {% else %} None{% endif %}</li>
+            <li class="list-unstyled">{{ transaction.date }} - Amount: ${{ transaction.amount }} - Description: {{ transaction.description }} - Tags: {% if transaction.tags.count %} {% for tag in transaction.tags.all %} {{ tag }} {% endfor %} {% else %} None{% endif %}<a href="{% url 'transaction_update' transaction.pk %}" class="btn btn-primary">Update</a>
+              <a href="{% url 'transaction_delete' transaction.pk %}" class="btn btn-danger">Delete</a></li>
         {% endfor %}
+    </ul>
+{% else %}
+    <h4>No transactions yet. Make one below!</h4>
+{% endif %}
     </ul>
 
     <h2>Add Transaction</h2>

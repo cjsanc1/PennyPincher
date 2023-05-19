@@ -45,3 +45,8 @@ class Transaction(models.Model):
     def save(self, *args, **kwargs): #code to save the amount and apply it to account
         super().save(*args, **kwargs) #super() lets you execute original use of save() method this is where it actually gets saved
         self.account.update_balance() #calls function from above
+
+    def delete(self, *args, **kwargs):
+        self.account.balance -= self.amount
+        self.account.save()
+        super().delete(*args, **kwargs)
